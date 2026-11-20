@@ -1,0 +1,32 @@
+name: Olympe — vérification des skills
+description: Vérifie les skills d'un dépôt (format Agent Skills officiel, sécurité, qualité) et annote la pull request.
+author: Carolinedanslesnuages
+
+inputs:
+  chemins:
+    description: Dossiers ou fichiers SKILL.md à vérifier, séparés par des espaces.
+    default: "."
+  strict:
+    description: Échouer aussi sur les points de sécurité (outils pré-autorisés, commandes au chargement…).
+    default: "false"
+  max-lignes:
+    description: Taille maximum conseillée d'un SKILL.md.
+    default: "500"
+
+runs:
+  using: composite
+  steps:
+    - name: Installer Olympe
+      shell: bash
+      run: npm ci --omit=dev --no-audit --no-fund --prefix "${{ github.action_path }}"
+    - name: Vérifier les skills
+      shell: bash
+      env:
+        CHEMINS: ${{ inputs.chemins }}
+        STRICT: ${{ inputs.strict }}
+        MAX_LIGNES: ${{ inputs.max-lignes }}
+      run: |
+        read -ra chemins <<< "$CHEMINS"
+        options=(--max-lignes "$MAX_LIGNES")
+        [ "$STRICT" = "true" ] && options+=(--strict)
+        node "${{ github.action_path }}/bin/olympe.mjs" "${chemins[@]}" "${options[@]}"

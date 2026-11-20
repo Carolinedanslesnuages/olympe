@@ -1,0 +1,14 @@
+{
+  "name": "@carolinedanslesnuages/olympe",
+  "version": "0.0.0",
+  "description": "Vérificateur de skills : format Agent Skills officiel, points de sécurité (outils pré-autorisés, commandes au chargement, consignes piégées, secrets) et qualité.",
+  "type": "module",
+  "bin": { "olympe": "bin/olympe.mjs" },
+  "files": ["bin", "src", "action.yml"],
+  "engines": { "node": ">=20" },
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "yaml": "2.9.1" },
+  "keywords": ["agent-skills", "skills", "claude-code", "linter", "securite"],
+  "repository": { "type": "git", "url": "git+https://github.com/Carolinedanslesnuages/olympe.git" },
+  "license": "MIT"
+}

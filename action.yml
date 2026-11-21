@@ -22,11 +22,11 @@ runs:
     - name: Vérifier les skills
       shell: bash
       env:
-        CHEMINS: ${{ inputs.chemins }}
+        PATHS: ${{ inputs.chemins }}
         STRICT: ${{ inputs.strict }}
-        MAX_LIGNES: ${{ inputs.max-lignes }}
+        MAX_LINES: ${{ inputs.max-lignes }}
       run: |
-        read -ra chemins <<< "$CHEMINS"
-        options=(--max-lignes "$MAX_LIGNES")
+        read -ra paths <<< "$PATHS"
+        options=(--max-lignes "$MAX_LINES")
         [ "$STRICT" = "true" ] && options+=(--strict)
-        node "${{ github.action_path }}/bin/olympe.mjs" "${chemins[@]}" "${options[@]}"
+        node "${{ github.action_path }}/bin/olympe.mjs" "${paths[@]}" "${options[@]}"

@@ -30,3 +30,7 @@ runs:
         options=(--max-lignes "$MAX_LINES")
         [ "$STRICT" = "true" ] && options+=(--strict)
         node "${{ github.action_path }}/bin/olympe.mjs" "${paths[@]}" "${options[@]}"
+
+branding:
+  icon: check-square
+  color: purple

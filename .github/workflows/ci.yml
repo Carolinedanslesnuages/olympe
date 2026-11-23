@@ -24,6 +24,30 @@ jobs:
       - run: npm ci
       - run: npm test
 
+  action:
+    name: L'action, sur des skills d'essai
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Une skill correcte passe, même en mode strict
+        uses: ./
+        with:
+          chemins: test/fixtures/skills/bonne
+          strict: "true"
+      - name: Une skill piégée est bloquée en mode strict
+        id: trapped
+        uses: ./
+        continue-on-error: true
+        with:
+          chemins: test/fixtures/skills/piegee
+          strict: "true"
+      - name: Vérifier que la skill piégée a bien été bloquée
+        if: steps.trapped.outcome != 'failure'
+        shell: bash
+        run: |
+          echo "::error title=Olympe::la skill piégée aurait dû faire échouer l'action."
+          exit 1
+
   titre:
     name: Titre de PR (Conventional Commits)
     if: github.event_name == 'pull_request'

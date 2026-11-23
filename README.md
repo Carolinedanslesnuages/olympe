@@ -41,9 +41,9 @@ Une skill ajoutée à la va-vite, avec une consigne piégée :
 Il faut Node.js 20 ou plus récent.
 
 ```sh
-npx github:Carolinedanslesnuages/olympe                     # toutes les skills sous le dossier courant
-npx github:Carolinedanslesnuages/olympe ~/.claude/skills    # vos skills installées
-npx github:Carolinedanslesnuages/olympe skills --strict     # échoue aussi sur la sécurité
+npx @carolinedanslesnuages/olympe                     # toutes les skills sous le dossier courant
+npx @carolinedanslesnuages/olympe ~/.claude/skills    # vos skills installées
+npx @carolinedanslesnuages/olympe skills --strict     # échoue aussi sur la sécurité
 ```
 
 ```text
